@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Input from "./TodoInput";
 import TodoItem from "./TodoItem";
+import Btn from "./Button" 
 export default class Todo extends Component {
   // state = {
   //   data : ""
@@ -15,6 +16,7 @@ export default class Todo extends Component {
   };
 
   render() {
+    console.log(this.props)
     return (
       <div>
         <Input
@@ -28,14 +30,13 @@ export default class Todo extends Component {
               <Input />
             ) : (
               <TodoItem
-                index={index + 1}
+                index={index}
                 data={element}
-                completeTodo={this.props.complete(index)}
+                completeTodo={this.props.complete}
                 removeTodo={this.props.remove}
-                editTodo={this.props.edit}
+                editTodo={this.props.editTodo}
               />
             )}
-            <button onClick={this.props.remove}></button>
             {/* {index + 1}. {element.text} | {element.complete.toString()} | {new Date(element.date).toString()}
             <button onClick={this.props.remove}><span role="img" aria-label="delete">🗑️</span></button>
             <button onClick={this.props.editTodo}><span role="img" aria-label="edit">✏️</span></button>

@@ -46,15 +46,14 @@ class App extends Component {
   };
 
   remove = (index) => {
-    console.log(index)
-    // let data = this.state.todo;
-    // data.splice(index.target.parentNode.id, 1);
-    // this.setState(
-    //   {
-    //     todo: data,
-    //   },
-    //   () => localStorage.setItem("data", JSON.stringify(this.state.todo))
-    // );
+    let data = this.state.todo;
+    data.splice(index, 1);
+    this.setState(
+      {
+        todo: data,
+      },
+      // () => localStorage.setItem("data", JSON.stringify(this.state.todo))
+    );
   }
 
   done(e){
@@ -69,26 +68,28 @@ class App extends Component {
 
   editTodo = (index) => {
     let data = this.state.todo;
-    data[index.target.parentNode.id].edit = data[index.target.parentNode.id].complete ? false : true;
+    data[index].edit = !data[index].complete
     this.setState(
       {
         todo: data,
       },
-      () => {localStorage.setItem("data", JSON.stringify(this.state.todo))
-    console.log(this.state.todo)}
+      
     );
+    //() => {localStorage.setItem("data", JSON.stringify(this.state.todo))
+    //console.log(this.state.todo)}
   }
 
   completeTask = (index) => {
+    console.log(index)
     let data = this.state.todo;
-    // data[index.target.parentNode.id].complete = data[index.target.parentNode.id].complete ? false : true;
-    // console.log(data)
-    // this.setState(
-    //   {
-    //     todo: data,
-    //   },
-    //   () => localStorage.setItem("data", JSON.stringify(this.state.todo))
-    // );
+    data[index].complete = !data[index].complete
+    console.log(data)
+    this.setState(
+      {
+        todo: data,
+      },
+      () => localStorage.setItem("data", JSON.stringify(this.state.todo))
+    );
   }
 
   render() {
@@ -96,7 +97,6 @@ class App extends Component {
       <div className="App">
         <Header remove={this.removeStorage} />
         <Todo
-          condition={this.state.edit}
           data={this.state.todo}
           submit={this.handleSubmit}
           handle={this.handleInput}
