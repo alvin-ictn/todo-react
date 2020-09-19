@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import Btn from './Button'
 export default class TodoInput extends Component {
   render() {
      return (
@@ -11,7 +11,7 @@ export default class TodoInput extends Component {
               name = "todoitem"
               onChange={(e) => this.props.handle(e)}
             />
-            <button id="add">Add</button>
+            <Btn id={"add"}>Add</Btn>
           </form>
         </div>
     )
