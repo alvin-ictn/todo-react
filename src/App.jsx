@@ -5,8 +5,17 @@ import Todo from "./Component/Todo/Todo";
 
 class App extends Component {
   state = {
-    todo: JSON.parse(localStorage.getItem("data")) || [],
+    todo: [],
   };
+  
+  componentDidMount(){
+    this.setState({
+      todo : JSON.parse(localStorage.getItem("data")) || []
+    })
+  }
+  componentDidUpdate(){
+    localStorage.setItem("data", JSON.stringify(this.state.todo))
+  }
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -24,13 +33,12 @@ class App extends Component {
                   complete: false,
                   edit : false,
                   date: new Date(),
+                  isEdited : false,
                 },
               ],
               textBaru: "",
             },
-            () => localStorage.setItem("data", JSON.stringify(this.state.todo))
           );
-            
           e.target.childNodes[0].value = "";
         }
       }
@@ -46,19 +54,31 @@ class App extends Component {
   };
 
   remove = (index) => {
+    console.log(index)
     let data = this.state.todo;
     data.splice(index, 1);
     this.setState(
       {
         todo: data,
       },
-      // () => localStorage.setItem("data", JSON.stringify(this.state.todo))
     );
   }
 
-  done(e){
-    console.log("THIS IS AFTER")
-    console.log(e)
+  done = (e) => {
+    let index = e.target.getAttribute("index")
+    if(e.which === 13){
+      console.log(e.target.value)
+      let data = this.state.todo;
+      data[index] = {
+        ...data[index],
+        edit : false,
+        text : e.target.value
+      }
+      this.setState({
+        todo : data,
+        textBaru : ""
+      })
+    }
     // if (event.which == 13) { // event which 13 adalah tombol enter
     //     this.data[index].text = event.target.value; // ini untuk mengisi key text pada  objek todo di index yang dituju
     //     this.storage('todo', this.data, true); // menyimpan data pada local storage dengan fungsi storage 
@@ -66,14 +86,15 @@ class App extends Component {
     // }
   }
 
-  editTodo = (index) => {
+  editTodo = (text,index) => {
     let data = this.state.todo;
-    data[index].edit = !data[index].complete
+    data[index].edit = !data[index].edit
+    data[index].isEdited = !data[index].isEdited;
     this.setState(
       {
         todo: data,
       },
-      
+
     );
     //() => {localStorage.setItem("data", JSON.stringify(this.state.todo))
     //console.log(this.state.todo)}
@@ -88,13 +109,13 @@ class App extends Component {
       {
         todo: data,
       },
-      () => localStorage.setItem("data", JSON.stringify(this.state.todo))
     );
   }
 
+
   render() {
     return (
-      <div className="App">
+      <div className="App" onClick={this.resetState}>
         <Header remove={this.removeStorage} />
         <Todo
           data={this.state.todo}

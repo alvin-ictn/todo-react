@@ -1,40 +1,62 @@
 import React, { Component } from "react";
-import Input from "./TodoInput";
+import TodoInput from "./TodoInput";
+import Input from "./Input";
 import TodoItem from "./TodoItem";
-import Btn from "./Button" 
 export default class Todo extends Component {
-  // state = {
-  //   data : ""
-  // }
-
-  edit = (e) => {
-    console.log(e.target.parentNode.childNodes[2].data);
-    // let props = this.props.done(e)
-    // let id = (e.target.parentNode.id)
-    // console.log( e.target.parentNode)
-    // e.target.parentNode.innerHTML = <Input/>
+  state = {
+    value : []
   };
+  componentDidMount(){
+    this.setState({value : Array.from(Array(this.props.data.length).keys())})
+  }
+
+  edit(text, index) {
+    console.log(this.state);
+    console.log(this.props.data)
+    let data = this.state.value
+    data[index] = text
+    console.log(data)
+    this.setState({
+      value : data
+    });
+    console.log(this.state.value);
+    this.props.editTodo(null, index);
+  }
 
   render() {
-    console.log(this.props)
     return (
       <div>
-        <Input
+        <TodoInput
           submit={this.props.submit}
           handle={this.props.handle}
           condition={this.props.condition}
+          name="textBaru"
         />
         {this.props.data.map((element, index) => (
           <li id={index} key={index}>
             {element.edit ? (
-              <Input />
+              <Input
+                index={index}
+                name="textBaru"
+                onChange={(e) =>{
+                  console.log(this.state.value)
+                  let data = this.state.value
+                  data[index] = e.target.value
+                  this.setState({
+                    value: data,
+                  })
+                }
+                }
+                onKeyPress={this.props.done}
+                value={this.state.value[index]}
+              />
             ) : (
               <TodoItem
                 index={index}
                 data={element}
                 completeTodo={this.props.complete}
                 removeTodo={this.props.remove}
-                editTodo={this.props.editTodo}
+                editTodo={() => this.edit(element.text, index)}
               />
             )}
             {/* {index + 1}. {element.text} | {element.complete.toString()} | {new Date(element.date).toString()}
