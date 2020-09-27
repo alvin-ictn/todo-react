@@ -1,3 +1,8 @@
+*, :after, :before {
+  margin: 0;
+  padding: 0;
+  box-sizing: content-box;
+}
 .App {
   text-align: center;
 }

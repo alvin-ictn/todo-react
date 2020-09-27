@@ -1,0 +1,17 @@
+.todo--item {
+  display: flex;
+  width:500px;
+}
+
+.todo--item--button {
+  display: flex;
+  flex-direction: column;
+}
+
+.todo--item > * > * {
+  width: 100%;
+
+}
+.todo--item--button {
+
+}
