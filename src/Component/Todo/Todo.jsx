@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import TodoInput from "./TodoInput";
 import Input from "./Input";
 import TodoItem from "./TodoItem";
+import styles from './Todo.module.css'
 export default class Todo extends Component {
   state = {
     value : []
@@ -25,15 +26,16 @@ export default class Todo extends Component {
 
   render() {
     return (
-      <div>
+      <div className={styles.Todo}>
         <TodoInput
           submit={this.props.submit}
           handle={this.props.handle}
           condition={this.props.condition}
           name="textBaru"
+          className={styles.TodoInput}
         />
         {this.props.data.map((element, index) => (
-          <li id={index} key={index}>
+          <li id={index} key={index} className={styles.TodoList}>
             {element.edit ? (
               <Input
                 index={index}

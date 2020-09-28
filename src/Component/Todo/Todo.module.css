@@ -1,0 +1,13 @@
+.Todo {
+  width: 600px;
+  min-width: 600px;
+  margin: 50px auto;
+  padding: 50px;
+  border: 1px solid black;
+}
+
+.TodoList {
+  display:flex;
+  justify-content: center;
+}
+
