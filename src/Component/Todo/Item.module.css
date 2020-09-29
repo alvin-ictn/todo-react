@@ -3,12 +3,15 @@
   width:50vw;
   height: 150px;
   justify-content: space-between;
-  background-color: lightgoldenrodyellow;
+  margin: 5px;
+  overflow: hidden;
 }
 
 .todo--item--information {
   height: inherit;
   width: 100%;
+  z-index: 2;
+  position: relative;
 }
 
 .todo--item--information > * {
@@ -26,6 +29,13 @@
 
 .todo--item--information > *:nth-child(2) {
   height: 108px;
+  background-color: #e97171;
+}
+
+
+.todo--item--information > *:nth-child(2n+1){
+  background-color: #931a25;
+  color: white;
 }
 
 .todo--item--button {
@@ -43,6 +53,30 @@
 .todo--item--button > *  {
   width: 50px;
   height: 50px;
+  cursor: pointer;
   border: none;
-  background-color: lawngreen;
+  overflow: hidden;
+  display: block;
+  position: relative;
+  right: 40px;
+}
+
+.todo--item--button > *:hover {
+  left: 0px;
+}
+
+.todo--item--button > * > * {
+  font-size: 12px;
+}
+
+.todo--item--button > *:nth-child(1) {
+  background-color: #ffd57e;
+}
+
+.todo--item--button > *:nth-child(2) {
+  background-color: #0d7377;
+}
+
+.todo--item--button > *:nth-child(3) {
+  background-color: #212121;
 }

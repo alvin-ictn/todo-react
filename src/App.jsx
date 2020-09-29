@@ -13,6 +13,7 @@ class App extends Component {
       todo : JSON.parse(localStorage.getItem("data")) || []
     })
   }
+  
   componentDidUpdate(){
     localStorage.setItem("data", JSON.stringify(this.state.todo))
   }
@@ -79,11 +80,6 @@ class App extends Component {
         textBaru : ""
       })
     }
-    // if (event.which == 13) { // event which 13 adalah tombol enter
-    //     this.data[index].text = event.target.value; // ini untuk mengisi key text pada  objek todo di index yang dituju
-    //     this.storage('todo', this.data, true); // menyimpan data pada local storage dengan fungsi storage 
-    //     this.show(); // menampilkan ulang data
-    // }
   }
 
   editTodo = (text,index) => {
@@ -96,8 +92,6 @@ class App extends Component {
       },
 
     );
-    //() => {localStorage.setItem("data", JSON.stringify(this.state.todo))
-    //console.log(this.state.todo)}
   }
 
   completeTask = (index) => {

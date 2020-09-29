@@ -7,13 +7,12 @@ export default class Todo extends Component {
   state = {
     value : []
   };
+  
   componentDidMount(){
     this.setState({value : Array.from(Array(this.props.data.length).keys())})
   }
 
   edit(text, index) {
-    console.log(this.state);
-    console.log(this.props.data)
     let data = this.state.value
     data[index] = text
     console.log(data)
